@@ -7,6 +7,6 @@ def histogram(words):
             wordlists.append((word, words.count(word)));
     return wordlists
 
-filename = sys.argv[1]
-words = open(sys.argv[1], "r").read().split()
-print(histogram(words))
+if __name__ == '__main__':
+    words = open(sys.argv[1], "r").read().split()
+    print(histogram(words))
