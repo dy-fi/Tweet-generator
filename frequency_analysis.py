@@ -44,5 +44,9 @@ def freqWeightRandom2(histogram):
         if destination < 0:
             return word
 
-
-profile.run(freqWeightRandom2(histogram("artofwar.txt")))
+count = 1000
+newList = []
+while(count > 0):
+    newList.append(freqWeightRandom2(histogram("artofwar.txt")))
+    count = count - 1
+print(newList)
