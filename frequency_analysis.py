@@ -28,7 +28,7 @@ def frequency(word, histogram):
 def randomWord(histogram):
     return random.choice(histogram)
 
-# slow
+# slow  O(n^2) and stores a list the size of the original corpus
 def freqWeightRandom(histogram):
     weightList = []
     for word in histogram:
@@ -36,15 +36,16 @@ def freqWeightRandom(histogram):
             weightList.append(word)
     return random.choice(weightList)
 
-# much faster
+# much faster O(n) and stores 1 int
 def freqWeightRandom2(histogram):
-    destination = random.randint(0, len(histogram))
+    corpLen = sum(histogram.values())
+    destination = random.randint(0, corpLen)
     for word in histogram:
         destination = destination - histogram[word]
         if destination < 0:
             return word
 
-count = 1000
+count = 10000
 newList = []
 while(count > 0):
     newList.append(freqWeightRandom2(histogram("artofwar.txt")))
