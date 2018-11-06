@@ -37,17 +37,19 @@ def freqWeightRandom(histogram):
     return random.choice(weightList)
 
 # much faster O(n) and stores 1 int
-def freqWeightRandom2(histogram):
-    corpLen = sum(histogram.values())
-    destination = random.randint(0, corpLen)
+def freqWeightRandom2(histogram, total):
+    destination = random.randint(0, total)
     for word in histogram:
         destination = destination - histogram[word]
         if destination < 0:
             return word
 
-count = 10000
-newList = []
-while(count > 0):
-    newList.append(freqWeightRandom2(histogram("artofwar.txt")))
-    count = count - 1
-print(newList)
+if __name__ == "__main__":
+    artofwar = histogram("artofwar.txt")
+    total = sum(artofwar.values())
+    count = 10000
+    newList = []
+    while(count > 0):
+        newList.append(freqWeightRandom2(artofwar))
+        count = count - 1
+    print(newList)
