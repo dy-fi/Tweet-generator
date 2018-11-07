@@ -14,30 +14,24 @@ def histogram(source_text):
     return histogram
 
 def unique_words(histogram):
-    checked = []
-    count = 0
-    for word in histogram:
-        if word not in checked:
-            checked.append(word)
-            count += 1
-    return count
+    return sum(histogram.values())
 
 def frequency(word, histogram):
     return histogram[word]
 
-def randomWord(histogram):
+def random_word(histogram):
     return random.choice(histogram)
 
-# slow  O(n^2) and stores a list the size of the original corpus
-def freqWeightRandom(histogram):
-    weightList = []
-    for word in histogram:
-        for i in range(histogram[word]):
-            weightList.append(word)
-    return random.choice(weightList)
+# # slow  O(n^2) and stores a list the size of the original corpus
+# def freqWeightRandom(histogram):
+#     weightList = []
+#     for word in histogram:
+#         for i in range(histogram[word]):
+#             weightList.append(word)
+#     return random.choice(weightList)
 
 # much faster O(n) and stores 1 int
-def freqWeightRandom2(histogram, total):
+def weighted_random(histogram, total):
     destination = random.randint(0, total)
     for word in histogram:
         destination = destination - histogram[word]
@@ -45,11 +39,11 @@ def freqWeightRandom2(histogram, total):
             return word
 
 if __name__ == "__main__":
-    artofwar = histogram("artofwar.txt")
-    total = sum(artofwar.values())
+    art_of_war = histogram("artofwar.txt")
+    total = sum(art_of_war.values())
     count = 10000
     newList = []
     while(count > 0):
-        newList.append(freqWeightRandom2(artofwar))
+        newList.append(weighted_random(art_of_war, total))
         count = count - 1
     print(newList)
