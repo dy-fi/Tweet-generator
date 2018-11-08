@@ -1,9 +1,9 @@
 import random
 
 def getRandomWords(numWords):
-"""
+    """
     Takes an argument(int) and returns that many random words
-"""
+    """
     words = open("/usr/share/dict/words", "r").read().split('\n')
     newSentence = []
     for i in range(int(numWords)):
