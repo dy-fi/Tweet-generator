@@ -5,7 +5,7 @@ import frequency_analysis as freq
 app = Flask(__name__)
 
 @app.route('/')
-def main_page():
+def main():
     random_sentence = []
     hist = freq.histogram("artofwar.txt")
     total = freq.unique_words(hist)
