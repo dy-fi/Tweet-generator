@@ -1,9 +1,12 @@
 from flask import Flask
+from flask import render_template
 import random
 import markov
 import frequency_analysis as freq
 
 app = Flask(__name__)
+url_for('static', filename="index.html")
+url_for('static', filename="style.css")
 
 @app.route('/')
 def main():
@@ -16,5 +19,5 @@ def main():
         random_sentence.append(freq.weighted_random(hist, total))
 
     random_sentence = ' '.join(random_sentence) + "."
-    # return render_template('index.html', sentence = random_sentence)
-    return random_sentence
+    return render_template('index.html', sentence = random_sentence)
+    # return random_sentence
