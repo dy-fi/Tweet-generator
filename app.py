@@ -5,8 +5,6 @@ import markov
 import frequency_analysis as freq
 
 app = Flask(__name__)
-url_for('static', filename="index.html")
-url_for('static', filename="style.css")
 
 @app.route('/')
 def main():
