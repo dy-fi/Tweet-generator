@@ -131,7 +131,7 @@ class LinkedList(object):
                 # if linked list had 1 node
                 if (self.tail != None and self.tail.data == item):
                     self.tail = None
-                # if successfully found what to delete 
+                # if successfully found what to delete
                 self.size -= 1
                 break
             prev = curr
@@ -158,7 +158,6 @@ class LinkedList(object):
 class DoubleNode(Node):
 
     def __init__(self, data):
-        """Initialize this node with the given data."""
         self.data = data
         self.next = None
         self.last = None

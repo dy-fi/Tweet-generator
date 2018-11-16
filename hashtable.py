@@ -32,12 +32,10 @@ class HashTable(object):
                 all_keys.append(key)
         return all_keys
 
-    def key_error(key):
-        raise KeyError('Key not found: {}'.format(key))
-
     def values(self):
         """Return a list of all values in this hash table.
         O(n^2) always iterates through the hash table in a nested for loop"""
+        all_values = []
         for bucket in self.buckets:
             for key, value in bucket.items():
                 all_values.append(key)
@@ -62,66 +60,45 @@ class HashTable(object):
                     counter += 1
         return counter
 
-    def contains(self, key, target=None):
+    def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        O(n) if target != none
-        O(n^2) if target == none
-        """
-        # only more efficient if self.buckets[bucket] >= 2 because 2(2)^2 == 2(2^2)
-        if target != None:
-            # can find the bucket directly
-            for key, value in self.buckets[target]:
-                if key in self.buckets[target]:
-                    return True
-            return False
+        O(1) constant time complexity"""
+        bucket = self.buckets[self._bucket_index(key)]
+        items = bucket.items()
+        # if key is in the bucket corresponding to its bucket index
+        if hash(key) in items:
+            return True
+        return False
 
-        # needs to find the bucket first
-        for bucket in self.buckets:
-            for key, value in bucket.items():
-                if key in self.buckets[bucket]:
-                    return True
-            return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        O(n^2) always calls the `contains` function with optional 'target' O(n)
-        inside of a for loop
-        """
-        for bucket in self.buckets:
-            if self.contains(key, bucket):
-                return bucket[key[0]]
+        O(1)"""
+        if self.contains(key):
+            bucket = self.buckets[self._bucket_index(key)]
+            return bucket.find(key)
 
-        key_error(key)
+        raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        O(n^2) always calls the contains function with optional 'target' O(n)
-        inside of a for loop
-        """
-        for bucket in self.buckets:
-            if self.contains(key, bucket):
-                bucket[key[1]] = value
-                break
-        key_error(key)
+        O(1)"""
+        if self.contains(key):
+            bucket = self.buckets[self._bucket_index(key)]
+            bucket.replace(key, value)
+        raise KeyError('Key not found: {}'.format(key))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         O(n^2) always iterates through the hash table in a nested for loop"""
         prev = None
         for bucket in self.buckets:
-            for k, v in bucket:
+            for k, v in bucket.items():
                 if k == key:
-                    # if head
-                    if prev == None:
-                        self.head = none
-                    # if tail
-                    if bucket[k].next == None:
-                        self.tail = none
-                    else:
-                        prev.next = bucket[k].next:
-                        break
+                    bucket(key[1]) == None
+                    bucket(key[0]) == None
 
-        key_error(key)
+        raise KeyError('Key not found: {}'.format(key))
 
 def test_hash_table():
     ht = HashTable()
