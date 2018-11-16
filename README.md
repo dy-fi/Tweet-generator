@@ -25,7 +25,7 @@ It is recommended you do not reimplement source code in custom structures, for e
 **import module**
 
 ```
-import ssss
+import ssss as ss
 
-ssss.printInspect(nameOfBuiltInFunction)
+ss.printInspect(nameOfBuiltInFunction)
 ```
