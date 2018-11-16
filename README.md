@@ -18,10 +18,12 @@ It is recommended you do not reimplement source code in custom structures, for e
 ### How to use
 
 **CLI**
+
 `> python3 /path/to/ssss.py funcname`
 
 
 **import module**
+
 ```
 import ssss
 
