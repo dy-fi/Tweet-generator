@@ -115,16 +115,28 @@ class LinkedList(object):
         Best case: O(1) when item == head
         Worst case: O(size) when item == tail
         """
-        curr = self.head;
-        prev = None;
-        while curr is not None:
-            if curr == item:
-                if prev is not None:
-                    prev.nextNode = curr.next
+        curr = self.head
+        prev = None
+        while (curr != None):
+            if (curr == item):
+                # if head
+                if (prev == None):
+                    self.head = self.head.next
                 else:
-                    self.head = curr.next
+                    prev.next = curr.next
+                    # if tail
+                    if (prev.next == None):
+                        self.tail = prev
+
+                # if linked list had 1 node
+                if (self.tail != None and self.tail.data == item):
+                    self.tail = None
+                # if successfully found what to delete 
+                self.size -= 1
+                break
             prev = curr
             curr = curr.next
+
         # if it didn't break out it means the item was not found in the linked list
         raise ValueError('Could not find {} in given linked list'.format(item))
 
