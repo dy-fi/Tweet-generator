@@ -75,7 +75,7 @@ class LinkedList(object):
         else:
             self.tail.next = new_node
             self.tail = self.tail.next
-            size.size += 1
+            self.size += 1
 
     def prepend(self, item):
         """
@@ -115,11 +115,15 @@ class LinkedList(object):
         Best case: O(1) when item == head
         Worst case: O(size) when item == tail
         """
-        curr = self.head
-        while(curr != None):
-            if curr.next == item:
-                curr.next = item.next
-                break
+        curr = self.head;
+        prev = None;
+        while curr is not None:
+            if curr == item:
+                if prev is not None:
+                    prev.nextNode = curr.next
+                else:
+                    self.head = curr.next
+            prev = curr
             curr = curr.next
         # if it didn't break out it means the item was not found in the linked list
         raise ValueError('Could not find {} in given linked list'.format(item))
@@ -139,7 +143,7 @@ class LinkedList(object):
         raise ValueError('Could not find {} in the given Doubly Linked List'.format(item))
 
 
-class DoubleNode(node):
+class DoubleNode(Node):
 
     def __init__(self, data):
         """Initialize this node with the given data."""
@@ -174,7 +178,7 @@ class DoubleLinkedList(LinkedList):
             self.tail.next = new_node
             new_node.last = self.tail
             self.tail = self.tail.next
-            size.size += 1
+            self.size += 1
 
     def prepend(self, item):
         """
