@@ -120,8 +120,79 @@ class LinkedList(object):
             if curr.next == item:
                 curr.next = item.next
                 break
+            curr = curr.next
         # if it didn't break out it means the item was not found in the linked list
         raise ValueError('Could not find {} in given linked list'.format(item))
+
+    def replace(self, item, newData):
+        """
+        Replace the data of a node instead of deleting it
+        O(n)
+        """
+        curr = self.head
+        while(curr != None):
+            if curr == item:
+                item.data = newData
+                break
+            curr = curr.next
+        # if it didn't break out it means the item was not found in the linked list
+        raise ValueError('Could not find {} in the given Doubly Linked List'.format(item))
+
+
+class DoubleNode(node):
+
+    def __init__(self, data):
+        """Initialize this node with the given data."""
+        self.data = data
+        self.next = None
+        self.last = None
+
+class DoubleLinkedList(LinkedList):
+
+    def __init__(self, items=None):
+        self.head = None
+        self.tail = None
+        size = 0
+
+        if items is not None:
+            for item in items:
+                self.append(item)
+                self.size += 1
+
+    def append(self, item):
+        """
+        Insert the given item at the tail of this doubly linked list.
+        O(1)
+        """
+        new_node = Node(item)
+
+        if (self.head == None):
+            self.head = new_node
+            self.tail = new_node
+            self.size = 1
+        else:
+            self.tail.next = new_node
+            new_node.last = self.tail
+            self.tail = self.tail.next
+            size.size += 1
+
+    def prepend(self, item):
+        """
+        Insert the given item at the head of this linked list.
+        O(1)
+        """
+        new_node = Node(item)
+
+        if (self.head == None):
+            self.head = new_node
+            self.tail = new_node
+            self.size = 1
+        else:
+            new_node.next = self.head
+            self.head.last = new_node
+            self.head = new_node
+            self.size += 1
+
 
 
 def test_linked_list():
