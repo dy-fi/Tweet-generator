@@ -57,8 +57,9 @@ class HashTable(object):
         O(n^2) always iterates trhough the hash table in a nested for loop"""
         counter = 0
         for bucket in self.buckets:
-            for key, value in bucket.items()
-                counter += 1
+            for key, value in bucket.items():
+                if bucket[key[0]] != None and bucket[key[1]] != None:
+                    counter += 1
         return counter
 
     def contains(self, key, target=None):
@@ -76,7 +77,7 @@ class HashTable(object):
 
         # needs to find the bucket first
         for bucket in self.buckets:
-            for key, value in bucket.items()
+            for key, value in bucket.items():
                 if key in self.buckets[bucket]:
                     return True
             return False
