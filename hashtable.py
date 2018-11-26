@@ -85,20 +85,16 @@ class HashTable(object):
         O(1)"""
         if self.contains(key):
             bucket = self.buckets[self._bucket_index(key)]
-            bucket.replace(key, value)
-        raise KeyError('Key not found: {}'.format(key))
+            bucket.delete(key)
+        bucket.append(key, value)
+
+
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         O(n^2) always iterates through the hash table in a nested for loop"""
-        prev = None
-        for bucket in self.buckets:
-            for k, v in bucket.items():
-                if k == key:
-                    bucket(key[1]) == None
-                    bucket(key[0]) == None
-
-        raise KeyError('Key not found: {}'.format(key))
+        bucket = self.buckets[self._bucket_index(key)]
+        bucket.delete(key)
 
 def test_hash_table():
     ht = HashTable()

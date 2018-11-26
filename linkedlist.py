@@ -21,7 +21,6 @@ class LinkedList(object):
         if items is not None:
             for item in items:
                 self.append(item)
-                self.size += 1
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -118,7 +117,8 @@ class LinkedList(object):
         curr = self.head
         prev = None
         while (curr != None):
-            if (curr == item):
+            # if it matches the item
+            if (curr.data == item):
                 # if head
                 if (prev == None):
                     self.head = self.head.next
@@ -133,7 +133,7 @@ class LinkedList(object):
                     self.tail = None
                 # if successfully found what to delete
                 self.size -= 1
-                break
+                return
             prev = curr
             curr = curr.next
 
