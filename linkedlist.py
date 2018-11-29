@@ -106,7 +106,6 @@ class LinkedList(object):
             curr = curr.next
         return None
 
-
     def delete(self, item):
         """
         Delete the given item from this linked list, or raise ValueError.

@@ -38,7 +38,7 @@ class HashTable(object):
         all_values = []
         for bucket in self.buckets:
             for key, value in bucket.items():
-                all_values.append(key)
+                all_values.append(value)
         return all_values
 
     def items(self):
@@ -56,7 +56,7 @@ class HashTable(object):
         counter = 0
         for bucket in self.buckets:
             for key, value in bucket.items():
-                if bucket[key[0]] != None and bucket[key[1]] != None:
+                if key != None and value != None:
                     counter += 1
         return counter
 
@@ -64,37 +64,39 @@ class HashTable(object):
         """Return True if this hash table contains the given key, or False.
         O(1) constant time complexity"""
         bucket = self.buckets[self._bucket_index(key)]
-        items = bucket.items()
-        # if key is in the bucket corresponding to its bucket index
-        if hash(key) in items:
-            return True
+        for i in bucket.items():
+            if i[0] == key:
+                return True
         return False
 
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         O(1)"""
-        if self.contains(key):
-            bucket = self.buckets[self._bucket_index(key)]
-            return bucket.find(key)
-
+        index = self._bucket_index(key)
+        for item in self.buckets[index].items():
+            if item[0] == key:
+                return item[1]
         raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         O(1)"""
+        bucket = self.buckets[self._bucket_index(key)]
         if self.contains(key):
-            bucket = self.buckets[self._bucket_index(key)]
-            bucket.delete(key)
-        bucket.append(key, value)
-
-
+            self.delete(key)
+        bucket.prepend((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         O(n^2) always iterates through the hash table in a nested for loop"""
         bucket = self.buckets[self._bucket_index(key)]
-        bucket.delete(key)
+        item = bucket.find(lambda data: data[0] == key)
+        if item:
+            bucket.delete(item)
+        else:
+            raise KeyError('Key not found: {}'.format(key))
+
 
 def test_hash_table():
     ht = HashTable()
@@ -115,7 +117,7 @@ def test_hash_table():
     print('length: {}'.format(ht.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for key in ['I', 'V', 'X']:
