@@ -52,27 +52,24 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        O(n^2) always iterates trhough the hash table in a nested for loop"""
+        O(n*k) always iterates through the buckets, and the items in those buckets"""
         counter = 0
         for bucket in self.buckets:
-            for key, value in bucket.items():
-                if key != None and value != None:
-                    counter += 1
+            counter += bucket.size
         return counter
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        O(1) constant time complexity"""
+        O(n) constant time complexity"""
         bucket = self.buckets[self._bucket_index(key)]
         for i in bucket.items():
             if i[0] == key:
                 return True
         return False
 
-
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        O(1)"""
+        O(n)"""
         index = self._bucket_index(key)
         for item in self.buckets[index].items():
             if item[0] == key:
@@ -81,7 +78,7 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        O(1)"""
+        O(n)"""
         bucket = self.buckets[self._bucket_index(key)]
         if self.contains(key):
             self.delete(key)
@@ -89,7 +86,7 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        O(n^2) always iterates through the hash table in a nested for loop"""
+        O(1) always iterates through the hash table in a nested for loop"""
         bucket = self.buckets[self._bucket_index(key)]
         item = bucket.find(lambda data: data[0] == key)
         if item:
