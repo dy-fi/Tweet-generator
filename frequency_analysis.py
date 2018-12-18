@@ -24,6 +24,16 @@ def histogram(source_text):
     return histogram
 
 
+def histogram_from_words(words):
+    """
+    Takes an argument(list of words) and returns the times each word is used
+    """
+    histogram = Counter()
+    for word in words:
+        histogram[word] += 1
+    return histogram
+
+
 # O(n) and stores 1 int
 def weighted_random(histogram, total):
     """
