@@ -4,7 +4,7 @@ import frequency_analysis
 import sys
 
 def dictogram(words):
-    hist = dictogram.Dictogram()
+    hist = Dictogram(words)
     for i in range(len(words) - 1):
         hist[words[i]].add_count(hist[words[i+1]])
     return hist
