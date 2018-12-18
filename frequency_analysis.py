@@ -58,11 +58,6 @@ def execute(hist):
         newList.append(weighted_random(art_of_war, unique_words(art_of_war)))
     return ' '.join(newList) + '.'
 
-def test():
-    frequencies = histogram("oneFish.txt")
-    words = weighted_randoms(frequencies)
-    return words
-
 # modularity
 if __name__ == "__main__":
     print(execute(histogram("artofwar.txt")))
