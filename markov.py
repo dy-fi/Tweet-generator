@@ -1,10 +1,9 @@
-import dictogram
-from collections import Counter
+from dictogram import Dictogram
 import frequency_analysis
 import sys
 
 def dictogram(words):
-    hist = Dictogram(words)
+    hist = Dictogram()
     for i in range(len(words) - 1):
         hist[words[i]].add_count(hist[words[i+1]])
     return hist
