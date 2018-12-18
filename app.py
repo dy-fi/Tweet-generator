@@ -9,7 +9,7 @@ app = Flask(__name__)
 def main():
     random_sentence = []
     words = open('artofwar.txt', "r").read().split()
-    hist = markov.dictogram()
+    hist = markov.dictogram(words)
     total = freq.unique_words(hist)
 
     for i in range(random.randint(5,9)):
