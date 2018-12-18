@@ -6,8 +6,8 @@ import sys
 def dictogram(words):
     hist = Counter()
     for i in range(len(words) - 1):
-        hist[words[i]] += 1
-    return dictograms
+        hist[words[i]].add_count(hist[words[i+1]])
+    return hist
 
 
 if __name__ == "__main__":
