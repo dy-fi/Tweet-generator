@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     random_sentence = []
-    words = open('art_of_war.txt', "r").read().split()
+    words = open('artofwar.txt', "r").read().split()
     hist = markov.dictogram()
     total = freq.unique_words(hist)
 
