@@ -8,7 +8,7 @@ def dictogram(words):
         if words[i] not in hist:
             hist[words[i]] = Dictogram()
         hist[words[i]].add_count(words[i+1])
-
+    return hist
 
 if __name__ == "__main__":
     words = sys.argv[1]
