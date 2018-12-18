@@ -10,7 +10,7 @@ def main():
     random_sentence = []
     words = open('artofwar.txt', "r").read().split()
     hist = markov.dictogram(words)
-    total = freq.unique_words(hist)
+    total = hist.tokens
 
     for i in range(random.randint(5,9)):
         random_sentence.append(freq.weighted_random(hist, total))
