@@ -3,10 +3,11 @@ import frequency_analysis
 import sys
 
 def dictogram(words):
+    hist = Dictogram()
     for i in range(len(words)-1):
-        if words[i] not in self:
-            self[words[i]] = Dictogram()
-        self[words[i]].add_count(words[i+1])
+        if words[i] not in hist:
+            hist[words[i]] = Dictogram()
+        hist[words[i]].add_count(words[i+1])
 
 
 if __name__ == "__main__":
