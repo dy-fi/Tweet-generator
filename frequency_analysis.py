@@ -42,7 +42,7 @@ def weighted_random(histogram, total):
 
     destination = random.randint(0, total)
     for word in histogram:
-        destination = destination - histogram[word]
+        destination = destination - histogram[word[1]]
         if destination < 0:
             return word
 
